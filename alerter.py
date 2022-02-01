@@ -17,9 +17,9 @@ def convert_fahrenheit_to_celcius(fahrenheit):
     return celcius
 
 
-def alert_in_celcius(fahrenheit):
+def alert_in_celcius(fahrenheit, network_alert_key):
     celcius = convert_fahrenheit_to_celcius(fahrenheit)
-    returnCode = network_alert_stub(celcius)
+    returnCode = network_alert_key(celcius)
     if returnCode != 200:
         # non-ok response is not an error! Issues happen in life!
         # let us keep a count of failures to report
@@ -29,8 +29,8 @@ def alert_in_celcius(fahrenheit):
         alert_failure_count += 1
 
 
-alert_in_celcius(400.5)
-alert_in_celcius(303.6)
+alert_in_celcius(400.5, network_alert_stub)
+alert_in_celcius(303.6, network_alert_stub)
 assert (alert_failure_count == 1)
 print(f'{alert_failure_count} alerts failed.')
 print('All is well (maybe!)')
