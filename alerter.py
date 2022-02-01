@@ -6,7 +6,7 @@ def network_alert_stub(celcius, threshold=175):
     # Return 200 for ok
     # Return 500 for not-ok
     # stub always succeeds and returns 200
-    if celcius >= threshold:
+    if celcius <= threshold:
         return 200
     else:
         return 500
@@ -14,6 +14,7 @@ def network_alert_stub(celcius, threshold=175):
 
 def convert_fahrenheit_to_celcius(fahrenheit):
     celcius = (fahrenheit - 32) * 5 / 9
+    print(celcius)
     return celcius
 
 
@@ -32,5 +33,8 @@ def alert_in_celcius(fahrenheit, network_alert_key):
 alert_in_celcius(400.5, network_alert_stub)
 alert_in_celcius(303.6, network_alert_stub)
 assert (alert_failure_count == 1)
+assert (network_alert_stub(400.5) == 500)
+assert (network_alert_stub(174) == 200)
+assert (round(convert_fahrenheit_to_celcius(200), 2) == 93.33)
 print(f'{alert_failure_count} alerts failed.')
 print('All is well (maybe!)')
